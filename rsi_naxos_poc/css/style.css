@@ -1,0 +1,63 @@
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --text-light: #f8fafc;
+    --accent-blue: #3b82f6;
+    --alert-red: #ef4444;
+    --safe-green: #10b981;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background-color: var(--bg-dark); color: var(--text-light); height: 100vh; overflow: hidden; }
+
+.dashboard-container { display: flex; height: 100%; }
+
+/* Sidebar & Routing Controls */
+.sidebar { width: 340px; background-color: var(--panel-bg); padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 2px 0 10px rgba(0,0,0,0.5); z-index: 10; position: relative;}
+.logo { font-size: 1.8rem; font-weight: bold; color: var(--text-light); }
+.logo span { color: var(--accent-blue); }
+
+.route-selector { display: flex; flex-direction: column; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border: 1px solid #334155; }
+.route-selector label { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; margin-top: 0.5rem;}
+.dropdown { width: 100%; padding: 0.8rem; background: #0f172a; color: white; border: 1px solid #475569; border-radius: 4px; font-size: 1rem; cursor: pointer; outline: none; }
+.dropdown:focus { border-color: var(--accent-blue); }
+
+.status-panel { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 8px; border: 1px solid #334155; }
+.status-panel h3 { font-size: 0.9rem; text-transform: uppercase; color: #94a3b8; margin-bottom: 1rem; }
+.status-indicator { display: flex; align-items: center; gap: 10px; font-weight: bold; margin-bottom: 1.5rem; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.safe .dot { background-color: var(--safe-green); box-shadow: 0 0 8px var(--safe-green); }
+.danger .dot { background-color: var(--alert-red); animation: pulseDot 1s infinite; }
+
+.hazard-info h4 { font-size: 0.85rem; color: #94a3b8; }
+.hazard-info p { font-size: 1.1rem; font-weight: bold; margin-top: 0.5rem; }
+#route-name { color: var(--accent-blue); }
+
+.controls { margin-top: auto; display: flex; flex-direction: column; gap: 1rem; }
+.btn { padding: 1rem; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn.primary { background-color: var(--accent-blue); color: white; }
+.btn.primary:hover { background-color: #2563eb; }
+.btn.secondary { background-color: transparent; border: 1px solid #475569; color: var(--text-light); }
+
+/* Map Area */
+.map-area { flex: 1; position: relative; }
+
+/* Localized Alert Pop-up */
+.alert-popup { position: absolute; top: 24px; right: 24px; width: 340px; background-color: #1e293b; border-left: 6px solid var(--alert-red); border-radius: 8px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4); z-index: 1000; overflow: hidden; animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.alert-popup.hidden { display: none; }
+.alert-header { background-color: rgba(239, 68, 68, 0.1); padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.alert-header h3 { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.05em; color: var(--alert-red); }
+.alert-body { padding: 16px; }
+.alert-body p { font-size: 1.25rem; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
+.action-badge { display: inline-block; background-color: var(--alert-red); color: white; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px; animation: flashBadge 1s infinite alternate; }
+
+/* Leaflet Map Overrides */
+.leaflet-container { background: #0f172a !important; font-family: 'Segoe UI', sans-serif; }
+.city-label { background: transparent; border: none; box-shadow: none; color: #cbd5e1; font-weight: bold; font-size: 0.95rem; text-shadow: 1px 1px 4px rgba(0,0,0,1); }
+.city-label::before { display: none; } /* removes the tooltip pointer */
+
+/* Animations */
+@keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+@keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes flashBadge { from { opacity: 0.7; } to { opacity: 1; box-shadow: 0 0 12px var(--alert-red); } }

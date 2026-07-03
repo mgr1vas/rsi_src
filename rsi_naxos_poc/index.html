@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadSafetyInsights</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">RoadSafetyInsights</div>
+            
+            <div class="route-selector">
+                <label for="start-point">Start Point:</label>
+                <select id="start-point" class="dropdown">
+                    <option value="Athens" selected>Athens</option>
+                    <option value="Thessaloniki">Thessaloniki</option>
+                    <option value="Patras">Patras</option>
+                </select>
+
+                <label for="end-point">Destination:</label>
+                <select id="end-point" class="dropdown">
+                    <option value="Thessaloniki">Thessaloniki</option>
+                    <option value="Naxos" selected>Naxos (Island)</option>
+                    <option value="Patras">Patras</option>
+                    <option value="Athens">Athens</option>
+                </select>
+            </div>
+
+            <div class="status-panel">
+                <h3>System Status</h3>
+                <div id="system-status" class="status-indicator safe">
+                    <span class="dot"></span> <span id="status-text">Ready to Monitor</span>
+                </div>
+                
+                <div class="hazard-info">
+                    <h4>Current Route Focus:</h4>
+                    <p id="route-name">Select route...</p>
+                    <p id="hazard-distance">-- to next threat</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="start-btn" class="btn primary">Start Route Simulation</button>
+                <button id="reset-btn" class="btn secondary">Reset Dashboard</button>
+            </div>
+        </aside>
+
+        <main class="map-area">
+            <div id="real-map" style="width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div id="alert-popup" class="alert-popup hidden">
+                <div class="alert-header">
+                    <span class="warning-icon">⚠️</span>
+                    <h3 id="popup-title">CRITICAL HAZARD</h3>
+                </div>
+                <div class="alert-body">
+                    <p id="popup-hazard-name">Analyzing...</p>
+                    <span id="popup-action" class="action-badge">TAKE ACTION</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
