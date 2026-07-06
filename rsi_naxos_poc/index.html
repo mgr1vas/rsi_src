@@ -2,114 +2,94 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoadSafetyInsights - Naxos</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RoadSafetyInsights - Naxos PoC</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">RoadSafety<span>Insights</span></div>
+
+    <div class="sidebar">
+        <div class="header">
+            <h1>RoadSafety<span>Insights</span></h1>
+            <p>Naxos Live Simulation</p>
+        </div>
+
+        <div class="tabs">
+            <button id="btn-tab-live" class="tab-btn active">Live Tracking</button>
+            <button id="btn-tab-stats" class="tab-btn">Στατιστικά</button>
+        </div>
+
+        <div id="tab-live" class="tab-content active-tab">
             
-            <div class="tabs">
-                <button class="tab-btn active" id="btn-tab-live">Live</button>
-                <button class="tab-btn" id="btn-tab-stats">Στατιστικά</button>
+            <div class="status-panel">
+                <div id="system-status" class="status-indicator safe"></div>
+                <span id="status-text">Ενεργό - Σε παρακολούθηση</span>
             </div>
 
-            <div id="tab-live" class="tab-content active-tab">
-                <div class="route-selector">
-                    <label>ΑΦΕΤΗΡΙΑ:</label>
-                    <select id="start-point" class="dropdown">
-                        <option value="AgiosProkopios">Άγιος Προκόπιος</option>
-                        <option value="Apiranthos">Απείρανθος</option>
-                        <option value="Apollonas">Απόλλωνας</option>
-                        <option value="Koronos">Κόρωνος</option>
-                        <option value="Moutsouna">Μουτσούνα</option>
-                        <option value="Plaka">Πλάκα</option>
-                        <option value="Filoti">Φιλώτι</option>
-                        <option value="Halki">Χαλκί</option>
-                        <option value="Chora" selected>Χώρα (Λιμάνι)</option>
-                    </select>
-
-                    <label>ΠΡΟΟΡΙΣΜΟΣ:</label>
-                    <select id="end-point" class="dropdown">
-                        <option value="AgiosProkopios">Άγιος Προκόπιος</option>
-                        <option value="Apiranthos">Απείρανθος</option>
-                        <option value="Apollonas">Απόλλωνας</option>
-                        <option value="Koronos">Κόρωνος</option>
-                        <option value="Moutsouna">Μουτσούνα</option>
-                        <option value="Plaka">Πλάκα</option>
-                        <option value="Filoti" selected>Φιλώτι</option>
-                        <option value="Halki">Χαλκί</option>
-                        <option value="Chora">Χώρα (Λιμάνι)</option>
-                    </select>
-                </div>
-
-                <div class="status-panel">
-                    <h3>Κατάσταση Συστήματος</h3>
-                    <div id="system-status" class="status-indicator safe">
-                        <span id="status-text">Ενεργό - Σε παρακολούθηση</span>
-                    </div>
-                    <div class="hazard-info">
-                        <p id="route-name">Επιλέξτε διαδρομή...</p>
-                    </div>
-                </div>
-
-                <button id="start-btn" class="btn primary">Έναρξη Προσομοίωσης</button>
-                <button id="pause-btn" class="btn warning hidden">Παύση Προσομοίωσης</button>
-                <button id="reset-btn" class="btn secondary">Επαναφορά</button>
+            <div class="route-display">
+                <strong>Διαδρομή:</strong> 
+                <span id="route-name">Επιλέξτε διαδρομή...</span>
             </div>
 
-            <div id="tab-stats" class="tab-content hidden">
-                <div class="stat-card">
-                    <h4>📊 Δρόμοι υπό παρακολούθηση</h4>
-                    <h2>16</h2>
-                </div>
-                <div class="stat-card">
-                    <h4>⚠️ Ζώνες Υψηλού Κινδύνου</h4>
-                    <h2 style="color: #ea580c;">3 Ενεργές</h2>
-                </div>
-                <div class="stat-card">
-                    <h4>⏱️ Ώρες Αιχμής Ατυχημάτων</h4>
-                    <p>14:00 - 18:00 (42% των συμβάντων)</p>
-                </div>
+            <div class="controls">
+                <label>Αφετηρία:</label>
+                <select id="start-point">
+                    <option value="Chora">Χώρα (Λιμάνι)</option>
+                    <option value="AgiosProkopios">Άγιος Προκόπιος</option>
+                    <option value="Plaka">Πλάκα</option>
+                    <option value="Halki">Χαλκί</option>
+                    <option value="Filoti">Φιλώτι</option>
+                    <option value="Apiranthos">Απείρανθος</option>
+                    <option value="Moutsouna">Μουτσούνα</option>
+                    <option value="Koronos">Κόρωνος</option>
+                    <option value="Apollonas">Απόλλωνας</option>
+                </select>
+
+                <label>Προορισμός:</label>
+                <select id="end-point">
+                    <option value="Chora">Χώρα (Λιμάνι)</option>
+                    <option value="AgiosProkopios">Άγιος Προκόπιος</option>
+                    <option value="Plaka">Πλάκα</option>
+                    <option value="Halki" selected>Χαλκί</option>
+                    <option value="Filoti">Φιλώτι</option>
+                    <option value="Apiranthos">Απείρανθος</option>
+                    <option value="Moutsouna">Μουτσούνα</option>
+                    <option value="Koronos">Κόρωνος</option>
+                    <option value="Apollonas">Απόλλωνας</option>
+                </select>
+
+                <button id="start-btn" class="btn btn-primary">Εκκίνηση Διαδρομής</button>
+                <button id="pause-btn" class="btn btn-warning hidden">Παύση Προσομοίωσης</button>
+                <button id="reset-btn" class="btn btn-secondary">Επαναφορά</button>
             </div>
-        </aside>
+            
+            <a href="landing.html" class="portal-link">← Επιστροφή στην Αρχική</a>
+        </div>
 
-        <main class="map-area">
-            <div id="real-map"></div>
-
-            <div id="alert-popup" class="alert-popup hidden">
-                <div class="popup-header">
-                    <span class="icon">📍</span>
-                    <h3 id="popup-hazard-name">Ανάλυση...</h3>
-                </div>
-                
-                <div class="weather-box">
-                    <span>Καιρικές Συνθήκες</span>
-                    <p id="popup-weather">--</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span>⚠️ Συνολικά</span>
-                        <h2 id="popup-total">--</h2>
-                    </div>
-                    <div class="stat-box">
-                        <span>📈 Πρόσφατα</span>
-                        <h2 id="popup-recent">--</h2>
-                    </div>
-                </div>
-
-                <div class="warning-footer">
-                    <button id="btn-understand" class="btn-understand">Απόκρυψη</button>
-                </div>
-            </div>
-        </main>
+        <div id="tab-stats" class="tab-content hidden">
+            <h3>Δεδομένα Διαδρομών</h3>
+            <p>Τα ιστορικά στατιστικά φορτώνονται...</p>
+        </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <div class="map-container">
+        <div id="real-map"></div>
+
+        <div id="alert-popup" class="hidden popup-glass">
+            <h2>⚠️ ΠΡΟΕΙΔΟΠΟΙΗΣΗ</h2>
+            <div class="popup-data">
+                <p><strong>Κίνδυνος:</strong> <span id="popup-hazard-name"></span></p>
+                <p><strong>Καιρός:</strong> <span id="popup-weather"></span></p>
+                <p><strong>Ιστορικό Ατυχημάτων:</strong> <span id="popup-total"></span></p>
+                <p><strong>Πρόσφατα:</strong> <span id="popup-recent"></span></p>
+            </div>
+            <button id="btn-understand" class="btn btn-acknowledge">Κατανόηση</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
