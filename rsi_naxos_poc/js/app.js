@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO'
+    // --- REVERTED TO OPENSTREETMAP ---
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
     // 2. Load Hazards IMMEDIATELY
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }).catch(err => console.error("Error loading hazards on boot: ", err));
 
-    // 3. THE MASTER ROUTES DATABASE
+    // 3. THE MASTER ROUTES DATABASE (Waypoints)
     const routesData = {
         // --- CHORA (PORT) ---
         "Chora-AgiosProkopios": [[37.1004, 25.3775], [37.0850, 25.3650], [37.0750, 25.3550]],
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Apiranthos-AgiosProkopios": [[37.0720, 25.5200], [37.0750, 25.3550]],
         "Apiranthos-Plaka": [[37.0720, 25.5200], [37.0350, 25.3750]],
         "Apiranthos-Halki": [[37.0720, 25.5200], [37.0650, 25.4500]],
-        "Apiranthos-Filoti": [[37.0720, 25.5200], [37.0520, 25.4965]],
+        "Apiranthos-Filoti": [[37.0720, 25.5200], [37.0600, 25.5100], [37.0520, 25.4965]],
         "Apiranthos-Moutsouna": [[37.0720, 25.5200], [37.0780, 25.5840]],
         "Apiranthos-Koronos": [[37.0720, 25.5200], [37.1140, 25.5320]],
         "Apiranthos-Apollonas": [[37.0720, 25.5200], [37.1850, 25.5500]],
@@ -200,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pauseBtn.style.backgroundColor = 'transparent';
         pauseBtn.style.color = '#ea580c'; 
 
-        const duration = 18000; 
+        // --- SLOWER ANIMATION UPDATE ---
+        const duration = 35000; // Increased to 35 seconds for a slower, smoother run
         
         function step(timestamp) {
             if (isPaused) {
@@ -251,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('popup-weather').innerText = hazard.properties.weather_factor;
                     document.getElementById('popup-total').innerText = hazard.properties.total_accidents;
                     document.getElementById('popup-recent').innerText = hazard.properties.recent_accidents;
-                    // Removed the assignment to the popup-action ID
                 }
                 
                 if (!isPaused) {
@@ -293,20 +295,46 @@ document.addEventListener('DOMContentLoaded', () => {
         routeNameDisplay.innerText = `${startSelect.options[startSelect.selectedIndex].text} -> ${endSelect.options[endSelect.selectedIndex].text}`;
         
         setTimeout(() => {
-            const routePath = routesData[routeKey];
+            const routeWaypoints = routesData[routeKey];
             
-            currentRouteLine = L.polyline(routePath, { color: '#0284c7', weight: 4, dashArray: '10, 10' }).addTo(map);
+            // Map Leaflet [Lat, Lng] array to strings of "Lng,Lat" separated by semicolons for OSRM.
+            const osrmCoordinates = routeWaypoints.map(coord => `${coord[1]},${coord[0]}`).join(';');
             
-            map.fitBounds(currentRouteLine.getBounds(), { 
-                paddingTopLeft: [400, 50], 
-                paddingBottomRight: [50, 50] 
-            });
+            // Call the public OSRM driving API to get the real road geometry
+            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${osrmCoordinates}?overview=full&geometries=geojson`;
 
-            vehicleMarker = L.circleMarker(routePath[0], { color: '#fff', fillColor: '#38bdf8', fillOpacity: 1, radius: 8, weight: 3 }).addTo(map);
-            
-            statusText.innerText = 'Ενεργό - Σε παρακολούθηση';
-            
-            setTimeout(() => animateVehicle(routePath, globalHazards), 800);
+            fetch(osrmUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code !== 'Ok') {
+                        console.error("OSRM Routing failed:", data);
+                        statusText.innerText = 'Σφάλμα Δρομολόγησης';
+                        return;
+                    }
+                    
+                    // OSRM returns GeoJSON coordinates as [Lng, Lat]. 
+                    // Convert them back to Leaflet's [Lat, Lng] format.
+                    const actualRoadCoords = data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+                    
+                    // Draw the real, detailed road line
+                    currentRouteLine = L.polyline(actualRoadCoords, { color: '#0284c7', weight: 4, dashArray: '10, 10' }).addTo(map);
+                    
+                    map.fitBounds(currentRouteLine.getBounds(), { 
+                        paddingTopLeft: [400, 50], 
+                        paddingBottomRight: [50, 50] 
+                    });
+
+                    // Place the vehicle marker and animate along the real road!
+                    vehicleMarker = L.circleMarker(actualRoadCoords[0], { color: '#fff', fillColor: '#38bdf8', fillOpacity: 1, radius: 8, weight: 3 }).addTo(map);
+                    
+                    statusText.innerText = 'Ενεργό - Σε παρακολούθηση';
+                    
+                    setTimeout(() => animateVehicle(actualRoadCoords, globalHazards), 800);
+                })
+                .catch(err => {
+                    console.error("Fetch Error:", err);
+                    statusText.innerText = 'Σφάλμα Δικτύου';
+                });
 
         }, 800);
     });
