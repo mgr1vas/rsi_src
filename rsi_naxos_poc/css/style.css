@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Base Styles & Layout
+   ========================================================================== */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+body, html { 
+    height: 100vh; 
+    width: 100vw; 
+    overflow: hidden; 
+    background-color: #0f172a; /* Keep map background dark */
+    color: #f8fafc; 
+}
+
+.dashboard-container { 
+    position: relative; 
+    height: 100vh; 
+    width: 100vw; 
+}
+
+/* ==========================================================================
+   Map Area Layout (100% Full Screen)
+   ========================================================================== */
+.map-area { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+}
+
+#real-map {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   Sidebar (Bright White Glassmorphism)
+   ========================================================================== */
+.sidebar { 
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: 360px; 
+    
+    /* LIGHT GLASSMORPHISM MAGIC */
+    background: rgba(255, 255, 255, 0.85); /* Bright frosted glass */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    
+    padding: 25px; 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 10; 
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for the floating panel */
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+
+.logo { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin-bottom: 30px; 
+    color: #0f172a; /* Dark navy text for white background */
+}
+
+.logo span { 
+    color: #0284c7; /* Solid blue accent */
+}
+
+/* ==========================================================================
+   Inner Sidebar Elements (Light Theme)
+   ========================================================================== */
+.tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+
+.tab-btn { 
+    flex: 1; 
+    padding: 12px; 
+    background: rgba(241, 245, 249, 0.8); /* Light gray/blue */
+    color: #64748b; 
+    border: 1px solid rgba(0,0,0,0.05); 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: 0.3s; 
+}
+
+.tab-btn.active { 
+    background: #0284c7; /* Solid Blue */
+    color: white; 
+    border-color: #0284c7;
+}
+
+.tab-content { display: none; flex-direction: column; gap: 20px; }
+.tab-content.active-tab { display: flex; }
+.hidden { display: none !important; }
+
+.route-selector label { 
+    font-size: 0.85rem; 
+    color: #475569; /* Dark gray */
+    font-weight: 600;
+    display: block; 
+    margin-bottom: 5px; 
+    margin-top: 10px; 
+}
+
+.dropdown { 
+    width: 100%; 
+    padding: 12px; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    border: 1px solid #cbd5e1; 
+    color: #0f172a; /* Dark text */
+    border-radius: 8px; 
+    outline: none; 
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.dropdown option { background-color: #ffffff; color: #0f172a; }
+
+.status-panel, .stat-card { 
+    background: rgba(255, 255, 255, 0.9); 
+    padding: 15px; 
+    border-radius: 12px; 
+    border: 1px solid rgba(0,0,0,0.05); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.status-panel h3, .stat-card h4 { font-size: 0.9rem; color: #64748b; margin-bottom: 10px; font-weight: 600;}
+.stat-card h2 { font-size: 1.8rem; margin: 0; color: #0f172a; }
+.stat-card p { font-size: 1rem; margin: 0; font-weight: bold; color: #334155;}
+
+.status-indicator { 
+    padding: 10px; border-radius: 6px; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; text-align: center;
+}
+/* Keep indicator colors vibrant */
+.safe { background: rgba(2, 132, 199, 0.15); color: #0284c7; border: 1px solid #0284c7; }
+.danger { background: rgba(249, 115, 22, 0.15); color: #ea580c; border: 1px solid #f97316; }
+
+#route-name { color: #0f172a; font-weight: 600; }
+
+/* Buttons */
+.btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; margin-top: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+.primary { background-color: #0284c7; color: white; }
+.primary:hover { background-color: #0369a1; }
+.secondary { background-color: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; box-shadow: none;}
+.secondary:hover { background-color: #e2e8f0; }
+.warning { background-color: #fff7ed; border: 1px solid #f97316; color: #ea580c; box-shadow: none;}
+.warning:hover { background-color: #ffedd5; }
+
+/* ==========================================================================
+   Orange Hazard Popup (Remains highly visible on the map)
+   ========================================================================== */
+.alert-popup { 
+    position: absolute; 
+    top: 25px; 
+    right: 25px; 
+    width: 340px; 
+    background: linear-gradient(145deg, rgba(249, 115, 22, 0.95), rgba(234, 88, 12, 0.95)); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px; 
+    padding: 20px; 
+    color: white; 
+    z-index: 1000; 
+    box-shadow: 0 10px 40px rgba(249, 115, 22, 0.4); 
+    border: 1px solid #fdba74; 
+}
+
+.popup-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.popup-header h3 { margin: 0; font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2);}
+.weather-box { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; margin-bottom: 15px; }
+.weather-box span { display: block; opacity: 0.9; font-size: 0.8rem; margin-bottom: 5px; }
+.weather-box p { margin: 0; font-weight: bold; font-size: 0.95rem;}
+.stats-grid { display: flex; gap: 10px; margin-bottom: 15px; }
+.stat-box { flex: 1; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; }
+.stat-box span { font-size: 0.8rem; opacity: 0.9; display: block; margin-bottom: 5px;}
+.stat-box h2 { margin: 0; font-size: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2);}
+.warning-footer { text-align: center; margin-top: 20px;}
+.warning-footer p { font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;}
+.btn-understand { width: 100%; background: white; color: #ea580c; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s;}
+.btn-understand:hover { background: #f8fafc; transform: scale(0.98); }

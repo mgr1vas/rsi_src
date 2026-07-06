@@ -1,0 +1,48 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "Hellenic Republic Open Data / Municipality of Naxos",
+    "generated_at": "2026-07-04T08:15:00Z"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.4750, 37.0620] },
+      "properties": {
+        "incident_id": "NX-2026-A104",
+        "hazard_type": "Τυφλή Ορεινή Στροφή",
+        "radius_meters": 800,
+        "total_accidents": 178,
+        "recent_accidents": 14,
+        "peak_time": "14:00 - 18:00",
+        "weather_factor": "🌧️ Βροχή - Γλιστερός δρόμος!"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.3750, 37.0580] },
+      "properties": {
+        "incident_id": "NX-2026-B088",
+        "hazard_type": "Ζώνη Υψηλού Κινδύνου ATV",
+        "radius_meters": 1200,
+        "total_accidents": 89,
+        "recent_accidents": 6,
+        "peak_time": "11:00 - 15:00",
+        "weather_factor": "💨 Άνεμος - Μεταφορά Άμμου"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.5300, 37.1500] },
+      "properties": {
+        "incident_id": "NX-2026-C211",
+        "hazard_type": "Επικίνδυνοι Πλευρικοί Άνεμοι",
+        "radius_meters": 1500,
+        "total_accidents": 134,
+        "recent_accidents": 9,
+        "peak_time": "16:00 - 20:00",
+        "weather_factor": "🌬️ Ισχυρά Μελτέμια (8 Μποφόρ)"
+      }
+    }
+  ]
+}
