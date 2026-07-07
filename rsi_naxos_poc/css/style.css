@@ -1,6 +1,4 @@
-/* =========================================
-   BASE STYLES & TYPOGRAPHY
-   ========================================= */
+/* BASE STYLES & TYPOGRAPHY */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -17,9 +15,7 @@ body {
     overflow: hidden;
 }
 
-/* =========================================
-   SIDEBAR (Glassmorphism)
-   ========================================= */
+/* SIDEBAR (Glassmorphism) */
 .sidebar {
     width: 380px;
     background: rgba(15, 23, 42, 0.85);
@@ -50,9 +46,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* =========================================
-   TABS & CONTROLS
-   ========================================= */
+/* TABS & CONTROLS */
 .tabs {
     display: flex;
     margin-bottom: 20px;
@@ -179,9 +173,7 @@ select option { background: #0f172a; }
 }
 .portal-link:hover { color: #38bdf8; }
 
-/* =========================================
-   MAP & POPUPS
-   ========================================= */
+/* MAP & POPUPS */
 .map-container {
     flex-grow: 1;
     position: relative;
@@ -226,9 +218,7 @@ select option { background: #0f172a; }
 }
 .btn-acknowledge:hover { background: #dc2626; }
 
-/* =========================================
-   📱 MOBILE RESPONSIVENESS (Screens < 768px)
-   ========================================= */
+/* 📱 MOBILE RESPONSIVENESS (Screens < 768px) */
 @media screen and (max-width: 768px) {
     body {
         flex-direction: column;
