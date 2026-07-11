@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RSI | Command Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/hub.css">
+</head>
+<body>
+
+    <div class="scan-sweep"></div>
+
+    <div class="hub-header">
+        <h1>RSI <span>Command Hub</span></h1>
+        <p>Κεντρικο Συστημα Διαχειρισης</p>
+    </div>
+
+    <div class="app-grid">
+        <!-- 1. Live Simulation (Active) -->
+        <a href="dashboard.html" class="app-card" data-nav>
+            <span class="badge badge-live">Ενεργο</span>
+            <div class="app-icon">🚦</div>
+            <div class="app-title">Live Προσομοίωση</div>
+            <div class="app-desc">PoC Δρομολόγησης Νάξου. Ζωντανή παρακολούθηση οχήματος.</div>
+        </a>
+
+        <!-- 2. Historical Analytics (Inactive) -->
+        <a href="#" class="app-card disabled">
+            <span class="badge badge-soon">Συντομα</span>
+            <div class="app-icon">📊</div>
+            <div class="app-title">Ανάλυση Ιστορικού</div>
+            <div class="app-desc">Στατιστικά ατυχημάτων, χάρτες θερμότητας & KPIs.</div>
+        </a>
+
+        <!-- 3. System Settings (Inactive) -->
+        <a href="#" class="app-card disabled">
+            <span class="badge badge-soon">Συντομα</span>
+            <div class="app-icon">⚙️</div>
+            <div class="app-title">Ρυθμίσεις Συστήματος</div>
+            <div class="app-desc">Διαχείριση APIs, αισθητήρων & δικαιωμάτων χρηστών.</div>
+        </a>
+    </div>
+
+    <a href="index.html" class="return-link" data-nav>← Επιστροφή στην Αρχική</a>
+
+    <script src="js/hub.js"></script>
+
+</body>
+</html>
