@@ -1,6 +1,6 @@
-# RoadSafetyInsights (RSI) - Naxos Mobile Application
+# RoadSafetyInsights (RSI) - Application
 
-A cross-platform mobile implementation of the **Road Safety Insights (RSI) Naxos Proof of Concept (PoC)** built using the Flutter framework. This application ports the original static simulation logic into a responsive, native mobile ecosystem for iOS and Android devices.
+A cross-platform mobile implementation of the **Road Safety Insights (RSI) Proof of Concept (PoC)** built using the Flutter framework. This application ports the original static simulation logic into a responsive, native mobile ecosystem for iOS and Android devices.
 
 The system parses localized hazard zones from geographic datasets, projects actual road navigation paths using real-world routing engine calculations, and actively triggers predictive audio-visual warnings when a user's coordinate path intersects hazardous roadway areas.
 
