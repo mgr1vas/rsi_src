@@ -1,0 +1,44 @@
+name: DevSecOps Pipeline
+
+# 1. TRIGGERS
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 2. SAST JOB: Scanning your Python code
+  sast_python_scan:
+    name: SAST - Python Security Scan (Bandit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit Scan on Scraper
+        run: bandit -r ./scraper -ll -i
+
+  # 3. DAST JOB: Attacking your live website
+  dast_zap_scan:
+    name: DAST - OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+    needs: sast_python_scan 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'https://roadsafetyinsights.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
