@@ -1,0 +1,42 @@
+[
+  {
+    "id": "a1",
+    "accident_description": "Rear-end collision involving two passenger vehicles. Traffic is heavily congested.",
+    "severity": "Medium",
+    "location": {
+      "city": "Volos",
+      "street": "Iasonos & Kartali"
+    },
+    "date": "2026-07-24T14:30:00Z"
+  },
+  {
+    "id": "a2",
+    "accident_description": "Minor incident involving a delivery motorcycle and a parked car.",
+    "severity": "Low",
+    "location": {
+      "city": "Arta",
+      "street": "Skoufa Street"
+    },
+    "date": "2026-07-24T13:45:00Z"
+  },
+  {
+    "id": "a3",
+    "accident_description": "Multi-vehicle accident near the intersection. Two lanes blocked.",
+    "severity": "High",
+    "location": {
+      "city": "Larissa",
+      "street": "Iroon Polytechneiou"
+    },
+    "date": "2026-07-24T12:15:00Z"
+  },
+  {
+    "id": "a4",
+    "accident_description": "Traffic incident affecting the bus lane. Expect significant delays.",
+    "severity": "Medium",
+    "location": {
+      "city": "Thessaloniki",
+      "street": "Egnatia & Venizelou"
+    },
+    "date": "2026-07-24T11:00:00Z"
+  }
+]
