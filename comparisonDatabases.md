@@ -1,4 +1,4 @@
-# Road Safety Insights (RSI) - Database Architecture & Progress
+# RoadSafetyInsights (RSI) - Database Architecture & Progress
 
 ## 1. Architectural Decision: Supabase vs. Firebase
 
