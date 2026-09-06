@@ -1,4 +1,4 @@
-# Greece Car Rental Discovery Scraper
+# RSI Greece Car Rental Discovery Scraper
 
 A standalone Python scraper that dynamically discovers car rental businesses and rental-related websites across Greece using search-engine queries.
 
