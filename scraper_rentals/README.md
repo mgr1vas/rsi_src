@@ -113,7 +113,7 @@ python scraper.py --output output/greece_car_rentals.csv
 ### Maximum search queries
 
 ```powershell
-python greece_car_rental_scraper.py --max-queries 100
+python scraper.py --max-queries 100
 ```
 
 Controls how many generated search queries are executed.
