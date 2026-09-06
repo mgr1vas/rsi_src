@@ -91,7 +91,7 @@ pip install -r requirements.txt
 Run with the default configuration:
 
 ```powershell
-python greece_car_rental_scraper.py
+python scraper.py
 ```
 
 By default, the scraper generates:
@@ -105,7 +105,7 @@ greece_car_rentals.csv
 You can specify a different output file:
 
 ```powershell
-python greece_car_rental_scraper.py --output output/greece_car_rentals.csv
+python scraper.py --output output/greece_car_rentals.csv
 ```
 
 ## Configuration Options
@@ -123,7 +123,7 @@ A larger number can increase discovery coverage but also increases runtime and s
 ### Search results per query
 
 ```powershell
-python greece_car_rental_scraper.py --results-per-query 15
+python scraper.py --results-per-query 15
 ```
 
 Controls how many search results are collected from each query.
@@ -131,7 +131,7 @@ Controls how many search results are collected from each query.
 ### Pages per domain
 
 ```powershell
-python greece_car_rental_scraper.py --max-pages-per-domain 6
+python scraper.py --max-pages-per-domain 6
 ```
 
 Controls how many pages are crawled for each discovered website.
@@ -153,7 +153,7 @@ when they are linked from the discovered website.
 ### Request delays
 
 ```powershell
-python greece_car_rental_scraper.py --min-delay 2 --max-delay 5
+python scraper.py --min-delay 2 --max-delay 5
 ```
 
 The scraper waits a random amount of time between requests.
@@ -163,7 +163,7 @@ This reduces aggressive request patterns and helps prevent unnecessary load on w
 ### HTTP timeout
 
 ```powershell
-python greece_car_rental_scraper.py --timeout 20
+python scraper.py --timeout 20
 ```
 
 Sets the HTTP request timeout in seconds.
@@ -171,7 +171,7 @@ Sets the HTTP request timeout in seconds.
 ### Retry count
 
 ```powershell
-python greece_car_rental_scraper.py --retries 3
+python scraper.py --retries 3
 ```
 
 Controls how many times failed HTTP requests are retried.
@@ -181,7 +181,7 @@ Controls how many times failed HTTP requests are retried.
 A more extensive crawl can be started with:
 
 ```powershell
-python greece_car_rental_scraper.py `
+python scraper.py `
     --max-queries 100 `
     --results-per-query 15 `
     --max-pages-per-domain 5 `
@@ -197,7 +197,7 @@ For PowerShell, the backtick character `` ` `` continues the command onto the ne
 The same command can also be written on one line:
 
 ```powershell
-python greece_car_rental_scraper.py --max-queries 100 --results-per-query 15 --max-pages-per-domain 5 --min-delay 2 --max-delay 5 --timeout 20 --retries 3 --output output/greece_car_rentals.csv
+python scraper.py --max-queries 100 --results-per-query 15 --max-pages-per-domain 5 --min-delay 2 --max-delay 5 --timeout 20 --retries 3 --output output/greece_car_rentals.csv
 ```
 
 ## Output
