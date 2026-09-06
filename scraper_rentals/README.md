@@ -395,16 +395,16 @@ Do not use the scraper to bypass authentication, access private information, def
 Recommended structure:
 
 ```text
-greece-car-rental-scraper/
+scraper_rentals/
 │
-├── greece_car_rental_scraper.py
+├── scraper.py
 ├── requirements.txt
 ├── README.md
 │
 ├── output/
 │   └── greece_car_rentals.csv
 │
-└── .venv/
+└── .venv/ -> Ignored
 ```
 
 The `.venv` directory is the local Python virtual environment and should not be committed to Git.
