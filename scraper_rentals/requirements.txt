@@ -1,0 +1,6 @@
+```text
+ddgs
+requests
+beautifulsoup4
+lxml
+```
