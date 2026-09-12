@@ -42,7 +42,7 @@
 ### Performance
 Ο χάρτης πρέπει να παραμένει ομαλός. Να αποφεύγονται άσκοπα rebuilds και υπερβολική απόδοση πολλών markers ταυτόχρονα.
 
-### Error States
+### Error States - Έλεγχοι Εγκυρότητας
 Η εφαρμογή πρέπει να χειρίζεται σωστά:
 * GPS unavailable
 * Location permission denied
