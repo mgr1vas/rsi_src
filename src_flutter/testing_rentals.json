@@ -1,0 +1,35 @@
+[
+  {
+    "id": "RENTAL_001",
+    "name": "Partner Rental A",
+    "city": "Athens",
+    "tagline": "Explore Greece safely",
+    "imageUrl": "assets/images/rental_a.png",
+    "ctaText": "View",
+    "targetUrl": "https://example.com/rental-a",
+    "sponsored": true,
+    "priority": 1
+  },
+  {
+    "id": "RENTAL_002",
+    "name": "Partner Rental B",
+    "city": "Patras",
+    "tagline": "Drive more. Discover more.",
+    "imageUrl": "assets/images/rental_b.png",
+    "ctaText": "View",
+    "targetUrl": "https://example.com/rental-b",
+    "sponsored": true,
+    "priority": 2
+  },
+  {
+    "id": "RENTAL_003",
+    "name": "Partner Rental C",
+    "city": "Thessaloniki",
+    "tagline": "Your journey starts here",
+    "imageUrl": "assets/images/rental_c.png",
+    "ctaText": "View",
+    "targetUrl": "https://example.com/rental-c",
+    "sponsored": true,
+    "priority": 3
+  }
+]
