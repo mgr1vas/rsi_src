@@ -1,0 +1,35 @@
+project:
+  name: RoadSafetyInsights Crete Rental Lead Scraper
+  contact_email: info@roadsafetyinsights.com
+
+discovery:
+  crete_bbox: [34.75, 23.35, 35.80, 26.45]
+  overpass_url: "https://overpass-api.de/api/interpreter"
+  osm_tags:
+    - '["amenity"="car_rental"]'
+    - '["shop"="car_rental"]'
+
+crawl:
+  timeout_seconds: 15
+  per_domain_delay_seconds: 1.5
+  max_pages_per_site: 6
+  max_response_bytes: 3000000
+  respect_robots_txt: true
+  user_agent: "RoadSafetyInsightsResearchBot/1.0 (+https://roadsafetyinsights.com; contact: info@roadsafetyinsights.com)"
+  page_keywords:
+    - contact
+    - contacts
+    - επικοινων
+    - about
+    - company
+    - εταιρ
+    - location
+    - station
+    - branch
+    - office
+    - fleet
+    - airport
+
+output:
+  csv: "output/crete_car_rentals.csv"
+  xlsx: "output/crete_car_rentals.xlsx"
