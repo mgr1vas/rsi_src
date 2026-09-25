@@ -1,0 +1,10 @@
+{
+  "input_records": 186,
+  "validated_before_dedupe": 111,
+  "app_ready_after_dedupe": 85,
+  "rejected_or_review": 75,
+  "duplicate_groups": 16,
+  "region_mismatch_remaining": 34,
+  "missing_dates_app_ready": 0,
+  "safety_warning_records": 0
+}
