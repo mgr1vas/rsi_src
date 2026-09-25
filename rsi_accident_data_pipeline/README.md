@@ -1,4 +1,4 @@
-# RoadSafetyInsights — Crete Accident Data Pipeline
+# RoadSafetyInsights | Crete Accident Data Pipeline
 
 Internal repository for collecting, validating, reviewing, deduplicating, and
 storing **traffic-accident locations in Crete derived from journalistic reports**.
@@ -52,9 +52,7 @@ Do not use these rows to automatically trigger live driver warnings.
 ```text
 rsi-accident-data-pipeline/
 ├── README.md
-├── CONTRIBUTING.md
 ├── SECURITY.md
-├── LICENSE.md
 ├── requirements.txt
 ├── config.yaml
 ├── run.py
